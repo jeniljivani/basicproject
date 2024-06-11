@@ -3,10 +3,15 @@
 
 
 	if(isset($_POST['u_id'])) {
-		$uname = $_POST['u_name'] ;
-		$uemail = $_POST['u_email'] ;
-		$u_id = $_POST['u_id'] ;
-		$sql = "update `ajaxdata` set `name`='$uname',`email`='$uemail' where `id`=".$u_id;
+		$uname = @$_POST['u_name'] ;
+		$uemail = @$_POST['u_email'] ;
+		$uimage = @$_FILES['u_image']['name'] ;
+		$u_id = $_POST['u_id'];
+
+		$path = "image/".$uimage;
+		move_uploaded_file($_FILES['u_image']['tmp_name'] , $path);
+
+		$sql = "update `ajaxdata` set `name`='$uname',`email`='$uemail',`image`='$uimage' where `id`=".$u_id;
 		mysqli_query($con,$sql);
 
 	}
@@ -31,9 +36,10 @@
 	 		<td><?php echo @$data['id'] ?></td>
 	 		<td><?php echo @$data['name'] ?></td>
 	 		<td><?php echo @$data['email'] ?></td>
+	 		<td><img style="width: 100px" src="image/<?php echo @$data['image']; ?>"></td>
 	 		<td><a href="javascript:void(0)" class="delete" attr-id= <?php echo $data['id'] ?>>Delete</a> </td>
 	 		<td><a href="javascript:void(0)" class="updata" attr-id= <?php echo $data['id'] ?>>Updata</a> </td>
-	 	</tr>
+ 		</tr>
 <?php  
 		}	
 	}

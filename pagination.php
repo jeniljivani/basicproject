@@ -25,12 +25,11 @@ $start = ($page - 1) * $limit ;
 
  }
 
- $res = mysqli_query($con,$total_rec);
- $total_row = mysqli_num_rows($res);
- $total_page= ceil($total_row/$limit);
-
-
-$res_page = mysqli_query($con,$sql_page);
+	$res = mysqli_query($con,$total_rec);
+	$total_row = mysqli_num_rows($res);
+	$total_page= ceil($total_row/$limit);
+		
+	$res_page = mysqli_query($con,$sql_page);
 
  ?>
 

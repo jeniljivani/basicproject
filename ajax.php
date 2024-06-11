@@ -19,7 +19,7 @@
  </head>
  <body id="body">
  
- 	<form method="post" id="data">
+ 	<form method="post" id="data" enctype="multipart/form-data">
  		<table>
  			<tr>
  				<th>Name :-</th>
@@ -30,34 +30,42 @@
  				<td><input type="email" name="email" id="email"></td> 				
  			</tr>
  			<tr>
+ 				<th>image :-</th>
+ 				<td><input type="file" name="image" id="image"></td> 				
+ 			</tr>
+ 			<tr>
  				<td><input type="submit" name="submit" value="click here"></td> 				
  			</tr>
  		</table>
  	</form>
+
 <table border="1" class="table">
 	<tr>
 		
 		<th>ID</th>
 		<th>Name</th>
 		<th>Email</th>
+		<th>image</th>
 		<th>Delete</th>
 		<th>Updata</th>
 	</tr>
 
 	
 	<tbody id="ans">
+
 <?php
 	while($data = mysqli_fetch_assoc($res_data))
 	{
  ?>
- 	<tr>
+ 	s<tr>
  		<td><?php echo @$data['id'] ?></td>
  		<td><?php echo @$data['name'] ?></td>
  		<td><?php echo @$data['email'] ?></td>
+ 		<td><img style="width: 100px" src="image/<?php echo @$data['image']; ?>"></td>
  		<td><a href="javascript:void(0)" class="delete" attr-id= <?php echo $data['id'] ?>>Delete</a> </td>
  		<td><a href="javascript:void(0)" class="updata" attr-id= <?php echo $data['id'] ?>>Updata</a> </td>
  	</tr>
-<?php   	
+<?php  
 	}
 ?>
 	</tbody>
@@ -77,7 +85,8 @@
 	    <div class="modal-body">
 	    	<input type="hidden" name="u_id" id="u_id"><br>
 	    	Name :- <input type="text" name="u_name" id="u_name"><br>
-	    	Email :- <input type="email" name="u_email" id="u_email">	    	
+	    	Email :- <input type="email" name="u_email" id="u_email"><br>   	
+	    	image :- <input type="file" name="u_image" id="u_image">	    	
 	    </div>
       	<div class="modal-footer">
       		<input type="submit" class="btn btn-primary" value="save">
@@ -92,24 +101,29 @@
 
 <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
 <!--************ AJAX ************-->
-<script type="text/javascript">
+<script>
 
 	$(document).ready(function() {
 		$('#data').submit(function(e) {
 			e.preventDefault();
 			
-			var formdata = $('#data').serialize();		
+			var formdata = new FormData(this);		
+			console.log(formdata);
 			$.ajax({
 				type:"POST",
-				data:formdata, 				//formdata is variable name
-				url:"ajax_insert.php",			//ajaxdata.php is file name send this file data
+				data:formdata, 
+				url:"ajax_insert.php",
+				processData: false,
+        contentType: false,	
 				success:function(res) {
 					$('#name').val('');
 					$('#email').val('');
+					$('#image').val('');
 					$('#ans').html(res);
+					console.log(res);
 				}			
-			})
-		})
+			});
+		});
 
 		$(document).on('click','.delete',function() {
 			var id = $(this).attr("attr-id")
@@ -141,12 +155,13 @@
 		})
 		$(document).on('submit','#u_form',function(e) {
 			e.preventDefault();			
-			var updateform = $('#u_form').serialize();
-
+				var formdata = new FormData(this);	
 			$.ajax({
 				type:'post',
 				url:'ajax_update.php',
-				data:updateform,
+				data:formdata,
+				processData: false,
+        contentType: false,	
 				success:function(res) {
 					$('#ans').html(res);
 					$('#exampleModal').modal('hide');

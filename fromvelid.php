@@ -45,12 +45,12 @@
 			<tr>
 				<td>CITY :-</td>
 				<td>
-					<select>
+					<select id="city">
 						<option value="" selected disabled>select city</option>
-						<option>Surat</option>
-						<option>Rakot</option>
-						<option>Mummbai</option>
-						<option>navsari</option>
+						<option value="surat">Surat</option>
+						<option value="rakot">Rakot</option>
+						<option value="mummbai">Mummbai</option>
+						<option value="navsari">navsari</option>
 					</select>
 					<span>enter your city</span>
 				</td>
@@ -72,17 +72,22 @@
 				$('#name').next('span').css('display','inline');
 				return false;
 			}
-			var email = $('#email').val();
-			var e_pat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+			// var email = $('#email').val();
+			// var e_pat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
-			if(e_pat.test(email)==false) {
-				$('#email').next('span').css('display','inline');	
+			// if(e_pat.test(email)==false) {
+			// 	$('#email').next('span').css('display','inline');	
+			// 	return false;
+			// }
+			// var pass = $('#password').val();
+			// var p_pat = /^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}/
+			// if(p_pat)
+			var city = $('$city').val();
+			if(city == '')
+			{
+				$('#city').next('span').css('display','inline');
 				return false;
 			}
-			var pass = $('#password').val();
-			var p_pat = /^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}/
-			if(p_pat)
-
 
 		})	
 

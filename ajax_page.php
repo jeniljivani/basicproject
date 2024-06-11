@@ -5,33 +5,14 @@
  	$limit = 10;
  	$page = 1;
 
-// $page =$_GET['page_no'];
-
-// if(!isset($_GET['page'])) {
-// 	$page = $_GET['page'];
-// }
-// else {
-// 	$page = 1;
-// }
 	$start = ($page - 1) * $limit ;
 
- 	// if(isset($_GET['search']))
- 	// {
- 	// 	$search = $_GET['search'];
- 	// 	$sql_page = "select * from `pagination` where name like '%$search%'  limit $start , $limit";
- 	// 	$total_rec = "select * from `pagination` where name like '%$search%' ";
-
- 	// }
- 	// else {
-		$sql_page = "select * from `pagination` limit $start , $limit";
-		$total_rec = "select * from `pagination`";
-
- 	// }
+	$sql_page = "select * from `pagination` limit $start , $limit";
+	$total_rec = "select * from `pagination`";
 
  	$res = mysqli_query($con,$total_rec);
  	$total_row = mysqli_num_rows($res);
  	$total_page= ceil($total_row/$limit);
-
 
 	$res_page = mysqli_query($con,$sql_page);
 
@@ -93,13 +74,6 @@
 	</table>
 	<br>
 <?php 
-	// if($page>1) { 
-	// 	echo "<a style='border:2px solid black; padding: 5px 10px; margin: 5px 2px; text-decoration: none;' href='pagination.php?page=".$page - 1 ."' >pre</a>";
-	// }
-	// else
-	// {
-	// 	echo "<a style='border:2px solid black; padding: 5px 10px; margin: 5px 2px; text-decoration: none; ' href='pagination.php?page=".$page."' >pre</a>";
-	// }
 
 	for ($i=1; $i<=$total_page; $i++)
 	{  
@@ -109,15 +83,6 @@
 		
 <?php }
 		
-	// } 
-	// 	if($page<=$total_page-1) 
-	// 	{ 
-	// 		echo "<a style='border:2px solid black; padding: 5px 10px; margin: 5px 2px; text-decoration: none;'  href='pagination.php?page=".$page + 1 ."'>net</a>";
-	// 	}
-	// 	else 
-	// 	{ 
-	// 		echo "<a style='border:2px solid black; padding: 5px 10px; margin: 5px 2px; text-decoration: none;'  href='pagination.php?page=".$page ."'>net</a>";
-	// 	}
 ?>
 
 </body>

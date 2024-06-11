@@ -12,11 +12,12 @@
 	{
  ?>
 	<tr>
- 		<td><?php echo @$data['id'] ?></td>
- 		<td><?php echo @$data['name'] ?></td>
- 		<td><?php echo @$data['email'] ?></td>
- 		<td><a href="javascript:void(0)" class="delete" attr-id= <?php echo $data['id'] ?>>Delete</a> </td>
- 		<td><a href="javascript:void(0)" class="updata" attr-id= <?php echo $data['id'] ?>>Updata</a> </td>
+	 	<td><?php echo @$data['id'] ?></td>
+	 	<td><?php echo @$data['name'] ?></td>
+	 	<td><?php echo @$data['email'] ?></td>
+	 	<td><img style="width: 100px" src="image/<?php echo @$data['image']; ?>"></td>
+	 	<td><a href="javascript:void(0)" class="delete" attr-id= <?php echo $data['id'] ?>>Delete</a> </td>
+	 	<td><a href="javascript:void(0)" class="updata" attr-id= <?php echo $data['id'] ?>>Updata</a> </td>
  	</tr>
 <?php  
 	}
